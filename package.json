@@ -1,0 +1,32 @@
+{
+  "name": "bowling_game",
+  "version": "1.0.0",
+  "description": "Bowling Game Kata",
+  "main": "game.js",
+  "scripts": {
+    "test": "mocha -w"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/ga-dc/bowling_game.git"
+  },
+  "keywords": [
+    "express",
+    "node",
+    "bowling_game",
+    "tdd",
+    "mocha"
+  ],
+  "author": "WDIDC",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ga-dc/bowling_game/issues"
+  },
+  "homepage": "https://github.com/ga-dc/bowling_game#readme",
+  "dependencies": {
+    "express": "^4.13.3",
+    "mocha": "^2.2.5",
+    "should": "^7.0.4",
+    "supertest": "^1.0.1"
+  }
+}
