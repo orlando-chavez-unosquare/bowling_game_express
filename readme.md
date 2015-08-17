@@ -37,6 +37,8 @@ After the setup is complete, run your tests to see how your app fares.
 $ mocha -w
 ```
 
+Pro Tip:  Comment out "future" tests.  Focus on one at a time.
+
 ## Bonus:
 - Extract your routes to a separate file.
 - Add your own example bowls in test/gameTest.js
@@ -44,7 +46,13 @@ $ mocha -w
 - Encapsulate some of this in an object.  
    - Add methods to the object.
 
+## Want to test manually?  Here are some suggested examples:
 
+- all gutter balls, score: 0
+- all balls hit one pin; score: 20
+- roll 4, 2.  Roll 3, 5; score: (6+8) = 14
+- roll a spare: 4, 6 (spare), 3, 1; score: (10 + 3) + 3 = 16
+- roll a strike: 10 (strike), 6, 2; score: = (10 + 8) + 8 = 26
 ## Scoring  (from [Wikipedia](https://en.wikipedia.org/wiki/Ten-pin_bowling#Scoring))
 In general, one point is scored for each pin that is knocked over. So if a player bowls over three pins with the first shot, then six with the second, the player would receive a total of nine points for that frame. If a player knocks down nine pins with the first shot, but misses with the second, the player would also score nine. When a player fails to knock down all ten pins after their second ball it is known as an open frame.
 

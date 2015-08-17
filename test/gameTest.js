@@ -36,6 +36,7 @@ describe('in a game of bowling, ', function() {
 
   describe('gutter game', function() {
     it('should return 0', function(done) {
+      // I roll 20 gutter balls - hey, it can happen.
       rollMany(20,0);
       assertScoreEquals(0, done);
     });
@@ -48,12 +49,23 @@ describe('in a game of bowling, ', function() {
     });
   });
 
+  describe('partial game, no closed frame', function() {
+    it('should return 16', function(done) {
+      roll(4);
+      roll(2); // This frame is 6
+      roll(3);
+      roll(5); // This frame is 8
+
+      assertScoreEquals(6+8, done);
+    });
+  });
+
   describe('one spare game', function() {
     it('should return 16', function(done) {
       roll(4);
       roll(6); //spare
       roll(3);
-      rollMany(17,0);
+      // rollMany(17,0);
       assertScoreEquals(16, done);
     });
   });
@@ -62,9 +74,9 @@ describe('in a game of bowling, ', function() {
     it('should return 28', function(done) {
       roll(10); //strike
       roll(6);
-      roll(3);
-      rollMany(17,0);
-      assertScoreEquals(28, done);
+      roll(2);
+      // rollMany(17,0);
+      assertScoreEquals(26, done);
     });
   });
 
