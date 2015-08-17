@@ -18,7 +18,7 @@ $ npm install -g nodemon
 
 - Install the "mocah" testing framework.
 ```
-$ nom install -g mocha
+$ npm install -g mocha
 ```
 
 - install our dependencies
