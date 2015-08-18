@@ -9,16 +9,50 @@ describe('root', function() {
   });
 });
 
-// Helper functions
-var roll = function(pins) {
-  request(game).post('/bowl/' + pins).end();
-};
+describe('start', function() {
+  beforeEach(function() {
+    request(game).get('/start').expect(200, done);
+  });
 
-var rollMany = function(times, pins) {
+  it('should reset score to 0', function(done) {
+    assertScoreEquals(0, done);
+  });
+});
+
+describe('score', function() {
+  it('should return an object with :score', function(done) {
+    assertScoreEquals(0, done);
+  });
+});
+
+describe('bowl/:pins', function() {
+  beforeEach(function() {
+    request(game).get('/start').expect(200, done);
+  });
+
+  it('should increment score by the number of pins', function(done) {
+    request(game).get('/bowl/3').expect(200, done);
+    assertScoreEquals(3, done);
+  });
+
+  it('should increment score by the number of pins', function(done) {
+    request(game).get('/bowl/7').expect(200, done);
+    assertScoreEquals(7, done);
+  });
+});
+
+
+
+// Helper functions
+function roll(pins) {
+  request(game).post('/bowl/' + pins).end();
+}
+
+function rollMany(times, pins) {
   for(var i=0;i<times;i++) {
     roll(pins);
   }
-};
+}
 
 var assertScoreEquals = function(expected, done) {
   request(game).get('/score').expect(200, function(err,res) {
