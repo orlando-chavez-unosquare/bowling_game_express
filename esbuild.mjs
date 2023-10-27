@@ -4,7 +4,7 @@ import { buildSync } from 'esbuild';
 const isDev = process.env.NODE_ENV === 'dev';
 
 try {
-	const mapFile = './out/index.js.map';
+	const mapFile = './out/game.js.map';
 	if (!isDev && existsSync(mapFile)) {
 		unlinkSync(mapFile);
 	}
