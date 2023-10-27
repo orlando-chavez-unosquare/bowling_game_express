@@ -1,0 +1,8 @@
+{
+    "recommendations": [
+        "ryanluker.vscode-coverage-gutters",
+        "editorconfig.editorconfig",
+        "shardulm94.trailing-spaces",
+        "dbaeumer.vscode-eslint"
+    ]
+}
