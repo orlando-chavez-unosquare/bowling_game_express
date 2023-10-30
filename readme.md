@@ -42,6 +42,26 @@ npm run test:coverage
 ```
 It will output a report on the terminal and a HTML file located in `.coverage/lcov-report/index.html`
 
+## Production Build
+- To build for productions, execute the command:
+```shell
+npm run build
+```
+It will output thee file `out/game.js`.
+- Then, to run the game, set your environment variables and run with node js, for example:
+```shell
+PORT=8080 node out/game.js
+```
+And you can open your browser at `http://localhost:8080` to see the server running.
+
+## Routes
+| Method | URL | Description |
+|:---|:----|:---|
+| `[GET]` | `/` | Returns a JSON object: `{ "game": "Bowling" }`. |
+| `[GET]` | `/start` | Start a new game, returning a JSON object with information of the current board. |
+| `[POST]` | `/bowl/:pins` | Register the number of pin (`:pins`) in the board. If there is no more frames to play, the result's attribute `gameover` will be `true`. |
+| `[GET]` | `/score` | Returns the score of the current game and the board in a JSON object. |
+
 ## Bonus:
 - Extract your routes to a separate file.
 - Add your own example bowls in test/gameTest.js
