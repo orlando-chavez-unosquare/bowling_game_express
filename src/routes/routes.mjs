@@ -2,9 +2,10 @@ import express from 'express';
 import { Bowling } from 'src/lib/bowling.mjs';
 
 export const routes = express.Router();
-let game = new Bowling();
 
-routes.get('/', (req, res) => {
+const game = new Bowling();
+
+routes.get('/', (_, res) => {
 	res.send({ game: 'Bowling' });
 });
 
