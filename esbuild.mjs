@@ -15,7 +15,7 @@ try {
 		platform: 'node',
 		bundle: true,
 		treeShaking: true,
-		minify: true,
+		minify: !isDev,
 		sourcemap: isDev,
 		logLevel: 'info',
 	});
