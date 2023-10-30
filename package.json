@@ -2,7 +2,7 @@
   "name": "bowling_game",
   "version": "1.0.0",
   "description": "Bowling Game Kata",
-  "main": "src/game.js",
+  "main": "out/game.js",
   "scripts": {
     "start": "nodemon",
     "test": "vitest run",
