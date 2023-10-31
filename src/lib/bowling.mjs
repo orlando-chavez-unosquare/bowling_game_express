@@ -34,7 +34,7 @@ export class Bowling {
 		this.#extraGameBalls = [];
 		this.#maxExtraBalls = 0;
 		this.#board = [];
-		for (let i = 0; i < MAX_PINS; i++) {
+		for (let i = 0; i <= LAST_FRAME; i++) {
 			this.#board.push([0, 0, 0])
 		}
 		return {
