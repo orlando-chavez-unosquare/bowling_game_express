@@ -1,0 +1,24 @@
+{
+	"env": {
+		"node": true,
+		"es6": true
+	},
+	"extends": [ "eslint:recommended" ],
+	"parserOptions": {
+		"ecmaVersion": "latest",
+		"sourceType": "module"
+	},
+	"ignorePatterns": [
+		"**/*.html",
+		"**/*.js"
+	],
+	"overrides": [
+		{
+			"files": [ "**/*.mjs" ],
+			"rules": {
+				"no-unused-vars": "off",
+				"no-debugger": "warn"
+			}
+		}
+	]
+}

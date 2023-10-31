@@ -2,9 +2,14 @@
   "name": "bowling_game",
   "version": "1.0.0",
   "description": "Bowling Game Kata",
-  "main": "game.js",
+  "main": "out/game.js",
   "scripts": {
-    "test": "mocha -w"
+    "start": "nodemon",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "test:coverage": "vitest run --coverage",
+    "lint": "eslint .",
+    "build": "npm run lint && node esbuild.mjs"
   },
   "repository": {
     "type": "git",
@@ -15,7 +20,7 @@
     "node",
     "bowling_game",
     "tdd",
-    "mocha"
+    "vitest"
   ],
   "author": "WDIDC",
   "license": "ISC",
@@ -24,9 +29,15 @@
   },
   "homepage": "https://github.com/ga-dc/bowling_game#readme",
   "dependencies": {
-    "express": "^4.13.3",
-    "mocha": "^2.2.5",
-    "should": "^7.0.4",
-    "supertest": "^1.0.1"
+    "express": "^4.13.3"
+  },
+  "devDependencies": {
+    "@types/node": "^20.8.9",
+    "@vitest/coverage-v8": "^0.34.6",
+    "esbuild": "^0.19.5",
+    "eslint": "^8.52.0",
+    "nodemon": "^3.0.1",
+    "supertest": "^6.3.3",
+    "vitest": "^0.34.6"
   }
 }

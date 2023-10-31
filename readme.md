@@ -1,6 +1,6 @@
 # It's Time to Bowl! :bowling:
 
-We're not going to keep score on paper.  Oooh no, that's what computers are for.  
+We're not going to keep score on paper.  Oooh no, that's what computers are for.
 
 Even [Wikipedia](https://en.wikipedia.org/wiki/Ten-pin_bowling#Scoring) knows that. "Correctly calculating bonus points can be difficult, especially when combinations of strikes and spares come in successive frames. In modern times, however, this has been overcome with automated scoring systems, linked to the pinsetters that set and clear the pins between frames."
 
@@ -11,39 +11,69 @@ This problem has been "overcome with with automated scoring systems", written by
 
 - fork and clone
 
-- Ensure the node monitor app is installed (this restarts node automatically on changes)
-```
-$ npm install -g nodemon
-```
-
-- Install the "mocah" testing framework.
-```
-$ npm install -g mocha
-```
-
 - install our dependencies
-```
-$ npm install
+```shell
+npm i
 ```
 
-- Open another tab and start the server
-```
-$ nodemon game.js
+- Open another tab and start the server (this restarts node automatically on changes)
+```shell
+npm start
 ```
 
 ## Run the tests
 After the setup is complete, run your tests to see how your app fares.
-```
-$ mocha -w
+```shell
+npm t
 ```
 
 Pro Tip:  Comment out "future" tests.  Focus on one at a time.
+
+### Run the test in watch mode
+To re-run the test once some file changes:
+```shell
+npm run test:watch
+```
+
+### Run the test coverage
+To see the app test coverage run:
+```shell
+npm run test:coverage
+```
+It will output a report on the terminal and a HTML file located in `.coverage/lcov-report/index.html`.
+
+## Debug with VS Code
+There are 2 configurations in `.vscode/launch.json`: *Debug* and *Attach*. This allow us to add breakepoints in the code.
+
+- __Debug__: Will run nodemon in watch mode and attach the debugger. No more acctions needed.
+
+- __Attach__: Requires that you run `npm start` in the terminal. Then it will attach the debugger to that process.
+
+## Production Build
+- To build for productions, execute the command:
+```shell
+npm run build
+```
+It will output thee file `out/game.js`.
+- Then, to run the game, set your environment variables and run with node js, for example:
+```shell
+PORT=8080 node out/game.js
+```
+And you can open your browser at `http://localhost:8080` to see the server running.
+
+## Routes
+| Method | URL | Description |
+|:---|:----|:---|
+| `[GET]` | `/` | Returns a JSON object: `{ "game": "Bowling" }`. |
+| `[GET]` | `/start` | Start a new game, returning a JSON object with information of the current board. |
+| `[POST]` | `/bowl/:pins` | Register the number of pin (`:pins`) in the board. If there is no more frames to play, the result's attribute `gameover` will be `true`. |
+| `[GET]` | `/score` | Returns the score of the current game and the board in a JSON object. |
 
 ## Bonus:
 - Extract your routes to a separate file.
 - Add your own example bowls in test/gameTest.js
 - Clean up your code.  Look for items to extract to functions.
-- Encapsulate some of this in an object.  
+- Encapsulate some of this in an object.
    - Add methods to the object.
 
 ## Want to test manually?  Here are some suggested examples:

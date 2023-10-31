@@ -1,0 +1,6 @@
+{
+	"watch": ["./src/**/*"],
+	"ext": "mjs",
+	"exec": "NODE_ENV=dev node esbuild.mjs && PORT=3010 node --inspect=9229 ./out/game.js",
+	"legacyWatch": true
+}
