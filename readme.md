@@ -40,7 +40,14 @@ To see the app test coverage run:
 ```shell
 npm run test:coverage
 ```
-It will output a report on the terminal and a HTML file located in `.coverage/lcov-report/index.html`
+It will output a report on the terminal and a HTML file located in `.coverage/lcov-report/index.html`.
+
+## Debug with VS Code
+There are 2 configurations in `.vscode/launch.json`: *Debug* and *Attach*. This allow us to add breakepoints in the code.
+
+- __Debug__: Will run nodemon in watch mode and attach the debugger. No more acctions needed.
+
+- __Attach__: Requires that you run `npm start` in the terminal. Then it will attach the debugger to that process.
 
 ## Production Build
 - To build for productions, execute the command:
