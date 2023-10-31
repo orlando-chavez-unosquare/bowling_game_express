@@ -1,3 +1,8 @@
+const MAX_PINS = 10;
+const BONUS_POS = 2;
+const LAST_FRAME = 9;
+const MAX_SCORE = 300;
+
 export class Bowling {
 
 	#score = 0;
@@ -23,13 +28,13 @@ export class Bowling {
 		this.#score = 0;
 		this.#currFrame = 0;
 		this.#currBall = 0;
-		this.#currMaxPins = 10;
-		this.#board = [];
+		this.#currMaxPins = MAX_PINS;
 		this.#gameOver = false;
 		this.#extraGame = false;
 		this.#extraGameBalls = [];
 		this.#maxExtraBalls = 0;
-		for (let i = 0; i < 10; i++) {
+		this.#board = [];
+		for (let i = 0; i < MAX_PINS; i++) {
 			this.#board.push([0, 0, 0])
 		}
 		return {
@@ -40,10 +45,10 @@ export class Bowling {
 	}
 
 	/** @param {number} pins */
-	#checkBonus(pins) {
+	#checkBonuses(pins) {
 		for (const frame of this.#board) {
-			if (frame[2] !== 0) {
-				frame[2] -= 1;
+			if (frame[BONUS_POS] !== 0) {
+				frame[BONUS_POS] -= 1;
 				this.#score += pins;
 			}
 		}
@@ -52,7 +57,7 @@ export class Bowling {
 	/** @param {number} pins */
 	#playExtraGame(pins) {
 
-		this.#checkBonus(pins);
+		this.#checkBonuses(pins);
 
 		let msg = 'OK!';
 
@@ -71,15 +76,13 @@ export class Bowling {
 		}
 		else if (allPinsDown && !frameDone) {
 			msg = 'Strike!';
-			this.#currMaxPins = 10;
+			this.#currMaxPins = MAX_PINS;
 		}
 
 		if (frameDone) {
 			this.#extraGame = false;
 			this.#gameOver = true;
-			if (this.#score === 300) {
-				msg = 'Perfect Game!';
-			}
+			if (this.#score === MAX_SCORE) msg = 'Perfect Game!';
 		}
 
 		return {
@@ -91,9 +94,23 @@ export class Bowling {
 		};
 	}
 
+	/** @param {number} maxBalls */
+	#checkExtraGame(maxBalls) {
+		if (this.#currFrame === LAST_FRAME) {
+			this.#extraGame = true;
+			this.#maxExtraBalls = maxBalls;
+		}
+	}
+
+	#checkGameOver() {
+		if (this.#currFrame > LAST_FRAME && !this.#extraGame) {
+			this.#gameOver = true;
+		}
+	}
+
 	/** @param {number} pins */
 	#playNormalGame(pins) {
-		this.#checkBonus(pins);
+		this.#checkBonuses(pins);
 
 		let msg = 'OK!';
 
@@ -108,30 +125,22 @@ export class Bowling {
 
 		if (allPinsDown && frameDone) {
 			msg = 'Spare!';
-			if (this.#currFrame === 9) {
-				this.#extraGame = true;
-				this.#maxExtraBalls = 1;
-			}
+			this.#checkExtraGame(1);
 		}
 		else if (allPinsDown && !frameDone) {
 			msg = 'Strike!';
-			if (this.#currFrame === 9) {
-				this.#extraGame = true;
-				this.#maxExtraBalls = 2;
-			}
+			this.#checkExtraGame(2);
+			frame[BONUS_POS] = 2;
+			// skip next ball
 			frame[this.#currBall] = 0;
 			this.#currBall++;
-			frame[2] = 2;
 		}
 
-		if (this.#currBall > 1) {
-			this.#currMaxPins = 10;
+		if (this.#currBall > 1) { // if time to play next frame
+			this.#currMaxPins = MAX_PINS;
 			this.#currBall = 0;
 			this.#currFrame++;
-
-			if (this.#currFrame === 10 && !this.#extraGame) {
-				this.#gameOver = true;
-			}
+			this.#checkGameOver();
 		}
 
 		return {
@@ -148,8 +157,8 @@ export class Bowling {
 		if (this.#gameOver) {
 			throw new Error('The game is over, please start a new game.');
 		}
-		if (pins < 0 || pins > 10) {
-			throw new Error('Bad pin number. Must be between 0 and 10.');
+		if (pins < 0 || pins > MAX_PINS) {
+			throw new Error(`Bad pin number. Must be between 0 and ${MAX_PINS}.`);
 		}
 		if (pins > this.#currMaxPins) {
 			throw new Error(`Bad pin number. You have ${this.#currMaxPins} pins left to bowl.`);

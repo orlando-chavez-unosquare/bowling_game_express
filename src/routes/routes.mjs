@@ -22,8 +22,6 @@ routes.post('/bowl/:pins', (req, res) => {
 	catch (err) {
 		res.status(500).send({
 			error: err.message
-				// TODO: Find a way to test an error from express itself or the build process.
-				//       This is only for completeness.
 				/* c8 ignore next 1 */
 				|| 'Unknown error.'
 		});
